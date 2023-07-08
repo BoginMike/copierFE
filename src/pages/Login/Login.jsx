@@ -22,7 +22,7 @@ export default function Login() {
                     // username and passord is correct and token is generated successfully.
                     localStorage.setItem('token', response.token)
                     //navigate user to songslist page
-                    navigate('/songs-list')
+                    navigate('/books-list')
 
                 } else {
                     // something went wrong
