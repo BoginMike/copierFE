@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import BookItem from './BookItem'
+import HomeIcon from '@mui/icons-material/Home';
+import { Pagination } from '@mui/material';
 
 export default function BooksList() {
     const [books, setBooks] = useState([])
+    const [nextDisabled, setNextDisabled] = useState(false);
+    const [totolPageCount,setTotalPageCount] = useState(1)
+    
     const [pageNumber, setPageNumber] = useState(1);
-    const [nextDisabled, setNextDisabled] = useState(false)
+    const handleChange = (event, value) => {
+        console.log(value)
+        setPageNumber(value);
+        getBooks(value)
+    };
+
 
     //page load 
     useEffect(() => {
@@ -19,9 +29,15 @@ export default function BooksList() {
         }).then(x => x.json())
             .then(response => {
                 setBooks(response.data)
-                if ((response.totalCount / response.pageSize) <= response.pageNumber){
+
+                let t = (response.totalCount / response.pageSize);
+                let totalPages = t > Math.floor(t) ? Math.floor(t) + 1 : Math.floor(t);  
+
+                setTotalPageCount(totalPages)
+
+                if ((response.totalCount / response.pageSize) <= response.pageNumber) {
                     setNextDisabled(true)
-                }else{
+                } else {
                     setNextDisabled(false)
                 }
             })
@@ -40,9 +56,9 @@ export default function BooksList() {
         <>
             <h1>BooksList</h1>
             <hr />
+            <HomeIcon />
             <h2>Page : {pageNumber}</h2>
-            <button disabled={pageNumber == 1} onClick={prev}>Prev Page</button>
-            <button disabled={nextDisabled} onClick={next}>Next Page</button>
+            <Pagination count={totolPageCount} page={pageNumber} onChange={handleChange} />
             <hr />
             <div>
                 {
