@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { getApiCall } from '../../shared/api-utils';
 
 export default function Login() {
     const [username, setUsername] = useState('')
@@ -11,25 +12,22 @@ export default function Login() {
         // do api call 
         // if we got token in response 
         // navigate to Song list page
-        fetch('http://localhost:3001/users/generate-token', {
-            headers: {
-                username: username,
-                password: password
-            }
-        }).then(x => x.json()) // convert response in json formatt
-            .then(response => {  // response is json response sent from the server
-                if (response.token) {
-                    // username and passord is correct and token is generated successfully.
-                    localStorage.setItem('token', response.token)
-                    //navigate user to songslist page
-                    navigate('/books-list')
+        getApiCall('/users/generate-token', {
+            username: username,
+            password: password
+        }).then(response => {  // response is json response sent from the server
+            if (response.token) {
+                // username and passord is correct and token is generated successfully.
+                localStorage.setItem('token', response.token)
+                //navigate user to songslist page
+                navigate('/books-list')
 
-                } else {
-                    // something went wrong
-                    localStorage.setItem('token', '')
-                    alert("Username or password is incorrct!")
-                }
-            })
+            } else {
+                // something went wrong
+                localStorage.setItem('token', '')
+                alert("Username or password is incorrct!")
+            }
+        })
     }
 
     return (

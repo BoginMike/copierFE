@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BookItem from './BookItem'
 import HomeIcon from '@mui/icons-material/Home';
 import { Pagination } from '@mui/material';
+import { getApiCall } from '../../shared/api-utils';
 
 export default function BooksList() {
     const [books, setBooks] = useState([])
@@ -22,11 +23,7 @@ export default function BooksList() {
     }, [])
 
     function getBooks(pageNumber) {
-        fetch('http://localhost:3001/books?pageNumber=' + pageNumber, {
-            headers: {
-                token: localStorage.getItem('token')
-            }
-        }).then(x => x.json())
+        getApiCall('/books?pageNumber=' + pageNumber)
             .then(response => {
                 setBooks(response.data)
 
