@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getApiCall } from '../../shared/api-utils';
+import { Button, TextField } from '@mui/material';
 
 export default function Login() {
     const [username, setUsername] = useState('')
@@ -33,11 +34,11 @@ export default function Login() {
     return (
         <div className='login-page'>
             <div className='login-container'>
-                <input value={username} onChange={x => setUsername(x.target.value)} type='text' placeholder='Username' />
-                <input value={password} onChange={x => setPassword(x.target.value)} type='password' placeholder='Password' />
-                <button onClick={login}>Log in</button>
+                <TextField value={username} onChange={x => setUsername(x.target.value)} type='text' placeholder='Username' />
+                <TextField value={password} onChange={x => setPassword(x.target.value)} type='password' placeholder='Password' />
+                <Button onClick={login}>Log in</Button>
                 <a href='/sign-up'> Create Account</a>
-            </div>
+            </div>-
         </div>
     )
 }
