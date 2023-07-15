@@ -1,5 +1,5 @@
 function getBaseUrl() {
-    return 'http://localhost:3001';
+    return process.env.REACT_APP_BASE_URL;
 }
 
 export function getApiCall(url, headers) {
