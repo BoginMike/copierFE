@@ -4,9 +4,16 @@ import { getApiCall } from '../../shared/api-utils';
 import { Button, TextField } from '@mui/material';
 
 export default function Login() {
+    ////
+    ////
+    //// Its not a good practice
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
-
+    // We should use react-hooks-forms 
+    // please refer signup page | that's how we should implement forms
+    ////
+    ////
+    
     const navigate = useNavigate()
 
     function login() {
