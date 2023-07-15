@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getApiCall } from '../../shared/api-utils'
 
 export default function SongList() {
 
@@ -11,11 +12,7 @@ export default function SongList() {
         // on page load this code will ge execute
         // componentDidMount()
 
-        fetch('http://localhost:3001/songs', {
-            headers: {
-                token: localStorage.getItem('token')
-            }
-        }).then(x => x.json())
+        getApiCall('/songs')
             .then(response => {
                 if (response?.status == false) {
                     // redirect to login
