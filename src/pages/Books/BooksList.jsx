@@ -3,6 +3,7 @@ import BookItem from './BookItem'
 import HomeIcon from '@mui/icons-material/Home';
 import { Pagination } from '@mui/material';
 import { getApiCall } from '../../shared/api-utils';
+import Header from '../../shared/components/Header';
 
 export default function BooksList() {
     const [books, setBooks] = useState([])
@@ -51,6 +52,7 @@ export default function BooksList() {
 
     return (
         <>
+            <Header/>
             <h1>BooksList</h1>
             <hr />
             <HomeIcon />

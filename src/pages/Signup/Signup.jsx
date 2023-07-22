@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { postApiCall } from '../../shared/api-utils'
 import { useForm } from "react-hook-form";
 import { Button, TextField } from '@mui/material';
+import FileUpload from '../../shared/components/FileUpload';
 
 
 export default function Signup() {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+    const [fileName,setFileName] = useState('')
     function onSubmit(data) {
+        data['profilePicture'] = fileName;
         postApiCall('/users', data)
             .then(r => {
                 alert(r)
             })
+    }
+
+    function uploaded(fname){
+        setFileName(fname)
     }
 
     return (
@@ -24,6 +30,8 @@ export default function Signup() {
                 <TextField type='password' {...register("password")} label="Password" />
 
                 <TextField type='text' {...register("email")} label="email" />
+
+                <FileUpload onUpload={uploaded}/>
 
                 <Button type="submit" variant='contained' > SIGNUP</Button>
             </form>

@@ -14,7 +14,7 @@ function App() {
         <Route path='/sign-up' element={<Signup />}></Route>
         <Route path='/songs-list' element={<SongList />}></Route>
         <Route path='/books-list' element={< BooksList/>}></Route>
-        <Route path='/' element={<div>Sagar</div>}></Route>
+        <Route path='/' element={<Login/>}></Route>
       </Routes>
     </div>
   );

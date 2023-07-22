@@ -63,3 +63,12 @@ body{
     color: white;
     margin-right: 5px;
 }
+
+
+.app-header{
+    background-color: rgb(56, 9, 9);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
