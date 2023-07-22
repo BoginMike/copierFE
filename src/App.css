@@ -72,3 +72,8 @@ body{
     align-items: center;
     gap: 10px;
 }
+
+.container{
+    padding: 15px;
+    margin: 10px;
+}

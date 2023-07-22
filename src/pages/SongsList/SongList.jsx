@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getApiCall } from '../../shared/api-utils'
+import { Avatar } from '@mui/material'
+import Header from '../../shared/components/Header'
 
 export default function SongList() {
 
@@ -26,10 +28,16 @@ export default function SongList() {
     }, [])
     return (
         <div>
+            <Header/>
             SongList
             <hr />
             {
-                songs.map(x => <div className='song-item'><span>{x.songName}</span><span>{x.rating}</span></div>)
+                songs.map(x =>
+                    <div className='song-item'>
+                        <Avatar src={process.env.REACT_APP_BASE_URL + '/image/' + x.albumCover}/>
+                        <span>{x.songName}</span>
+                        <span>{x.rating}</span>
+                    </div>)
             }
         </div>
     )
