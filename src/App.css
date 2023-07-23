@@ -77,3 +77,9 @@ body{
     padding: 15px;
     margin: 10px;
 }
+
+.app-link{
+    text-decoration: none;
+    color: white;
+    margin: 10px;
+}

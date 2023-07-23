@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import jwt_decode from "jwt-decode";
 import { Avatar } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 export default function Header() {
 
     const [username, setUsername] = useState('')
     const [profilePicture, setProfilePicture] = useState('')
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         let token = localStorage.getItem('token')
@@ -14,10 +19,26 @@ export default function Header() {
         setProfilePicture(decoded.profilePicture)
     }, [])
 
+    function logout(){
+        if(window.confirm("Are you sure want to logout?")){
+            localStorage.clear();
+            navigate('/login')
+        }
+        
+    }
+
     return (
         <div className='app-header'>
-            <h1>Hi {username}</h1>
-            <Avatar src={process.env.REACT_APP_BASE_URL + '/image/' + profilePicture}/>
+            <div>
+                <h1>Hi {username}</h1>
+                <Avatar src={process.env.REACT_APP_BASE_URL + '/image/' + profilePicture} />
+                <span onClick={logout}>
+                    <LogoutIcon />
+                </span>
+            </div>
+            <div>
+                <Navbar/>
+            </div>
         </div>
     )
 }
