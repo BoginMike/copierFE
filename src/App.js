@@ -7,6 +7,8 @@ import SongList from './pages/SongsList/SongList';
 import BooksList from './pages/Books/BooksList';
 import AddSong from './pages/AddSong/AddSong';
 import ProtectedRoute from './shared/components/ProtectedRoute';
+import NotFoundPage from './shared/components/NotFoundPage';
+import Profile from './pages/Profile/Profile';
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
         <Route path='/songs-list' element={<ProtectedRoute><SongList /></ProtectedRoute>}></Route>
         <Route path='/books-list' element={<ProtectedRoute>< BooksList /></ProtectedRoute>}></Route>
         <Route path='/add-song' element={<ProtectedRoute>< AddSong /></ProtectedRoute>}></Route>
+        <Route path='/profile' element={<ProtectedRoute>< Profile /></ProtectedRoute>}></Route>
         <Route path='/' element={<Login />}></Route>
+        <Route path='*' element={<NotFoundPage />}></Route>
       </Routes>
     </div>
   );

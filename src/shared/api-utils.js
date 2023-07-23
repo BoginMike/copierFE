@@ -38,6 +38,19 @@ export function putApiCall(url, body, headers) {
     }).then(x => x.json())
 }
 
+export function patchApiCall(url, body, headers) {
+    return fetch(getBaseUrl() + url, {
+        headers: {
+            token: localStorage.getItem('token'),
+            'Content-Type':"application/json",
+            ...headers
+        },
+        method: "PATCH",
+        body: JSON.stringify(body)
+    }).then(x => x.json())
+}
+
+
 export function deleteApiCall(url, headers) {
     return fetch(getBaseUrl() + url, {
         headers: {

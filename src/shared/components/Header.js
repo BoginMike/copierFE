@@ -19,25 +19,31 @@ export default function Header() {
         setProfilePicture(decoded.profilePicture)
     }, [])
 
-    function logout(){
-        if(window.confirm("Are you sure want to logout?")){
+    function logout() {
+        if (window.confirm("Are you sure want to logout?")) {
             localStorage.clear();
             navigate('/login')
         }
-        
+
+    }
+
+    function showProfilePage(){
+        navigate('/profile')
     }
 
     return (
         <div className='app-header'>
             <div>
                 <h1>Hi {username}</h1>
-                <Avatar src={process.env.REACT_APP_BASE_URL + '/image/' + profilePicture} />
+                <span onClick={showProfilePage}>
+                    <Avatar src={process.env.REACT_APP_BASE_URL + '/image/' + profilePicture} />
+                </span>
                 <span onClick={logout}>
                     <LogoutIcon />
                 </span>
             </div>
             <div>
-                <Navbar/>
+                <Navbar />
             </div>
         </div>
     )
