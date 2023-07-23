@@ -3,21 +3,26 @@ import { postApiCall } from '../../shared/api-utils'
 import { useForm } from "react-hook-form";
 import { Button, TextField } from '@mui/material';
 import FileUpload from '../../shared/components/FileUpload';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Signup() {
-
+    const navigate = useNavigate()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const [fileName,setFileName] = useState('')
+    const [fileName, setFileName] = useState('')
     function onSubmit(data) {
         data['profilePicture'] = fileName;
         postApiCall('/users', data)
             .then(r => {
-                alert(r)
+                if (r == "User Created") {
+                    navigate('/login')
+                }else{
+                    window.alert("Something went wrong")
+                }
             })
     }
 
-    function uploaded(fname){
+    function uploaded(fname) {
         setFileName(fname)
     }
 
@@ -31,7 +36,7 @@ export default function Signup() {
 
                 <TextField type='text' {...register("email")} label="email" />
 
-                <FileUpload onUpload={uploaded}/>
+                <FileUpload onUpload={uploaded} />
 
                 <Button type="submit" variant='contained' > SIGNUP</Button>
             </form>
